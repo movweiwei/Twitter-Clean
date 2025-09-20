@@ -1,116 +1,100 @@
-# X Clean
+# X Clean - Twitter/X UI Cleaner Extension
 
-A Chrome extension that cleans up the X/Twitter interface by hiding unwanted elements and providing customizable layout options.
+A privacy-focused Chrome extension that cleans up the Twitter/X interface by hiding unwanted elements and providing customization options.
 
-## Features
+## 🔒 Privacy & Security
+
+- **No data collection**: This extension does not collect, store, or transmit any personal data
+- **Local operation**: All functionality runs locally within your browser
+- **Minimal permissions**: Only requests necessary permissions for core functionality
+- **Content Security Policy**: Implements CSP for enhanced security
+- **Open source**: Code is transparent and auditable
+
+## ✨ Features
 
 ### Hide Elements
-- **Hide Grok**: Remove Grok AI assistant from the interface
-- **Hide Premium Sign-up**: Remove premium subscription prompts
-- **Hide Subscribe Message**: Remove subscription-related messages
-- **Hide Verified Orgs**: Remove verified organization promotions
-- **Hide Other**: Remove miscellaneous promotional elements
+- Hide Grok AI features
+- Hide Premium sign-up prompts
+- Hide subscription messages
+- Hide verified organization promotions
+- Hide other promotional content
 
-### Hide Navigation
-- **Hide Explore**: Remove the Explore tab from navigation
-- **Hide Notifications**: Remove the Notifications tab from navigation
-- **Hide Messages**: Remove the Messages tab from navigation
-- **Hide Communities**: Remove the Communities tab from navigation
-- **Hide Bookmarks**: Remove the Bookmarks tab from navigation
+### Navigation Customization
+- Hide Explore tab
+- Hide Notifications tab
+- Hide Messages tab
+- Hide Communities tab
+- Hide Bookmarks tab
 
-### Hide Notices
-- **Hide Muted Account Notices**: Remove notices about muted accounts
-- **Hide Right Column**: Remove the entire right sidebar column
+### Layout Options
+- Hide right sidebar
+- Customize post area width
+- Adjust sidebar spacing
+- Hide muted account notices
 
-### Layout Settings
-- **Larger Post Area**: Expand the main content area for better readability
-- **Custom Width**: Set custom width for the main content area (400-1200px)
-- **Right Sidebar Spacing**: Adjust padding for the right sidebar
-- **Padding Width**: Customize the padding width (0-100px)
+### Link Management
+- Automatically convert copied x.com links to twitter.com links
 
-### Additional Features
-- **Link Replacement**: Automatically convert copied x.com links to twitter.com links
+## 🛡️ Permissions Explained
 
-## Installation
+- **Storage**: Saves your UI preferences locally
+- **Clipboard Write**: Modifies copied links (optional feature)
+- **Tabs**: Reloads Twitter/X pages when settings change
+- **Host Permissions**: Only for twitter.com and x.com domains
+
+## 📋 Installation
 
 1. Download or clone this repository
-2. Open Chrome and navigate to `chrome://extensions/`
-3. Enable "Developer mode" in the top right corner
+2. Open Chrome and go to `chrome://extensions/`
+3. Enable "Developer mode"
 4. Click "Load unpacked" and select the extension folder
-5. The extension will be installed and ready to use
+5. The extension will be available in your Chrome toolbar
 
-## Usage
+## 🔧 Usage
 
-1. Click the X Clean extension icon in your browser toolbar
-2. Configure your preferences using the checkboxes and input fields
-3. Click "Save" to apply your settings
-4. Refresh any open X/Twitter tabs to see the changes
+1. Click the extension icon in your toolbar
+2. Configure your preferences in the popup
+3. Settings are automatically saved and applied
+4. Visit Twitter/X to see the changes
 
-## Settings
+## 🚫 What This Extension Does NOT Do
 
-The extension provides a comprehensive settings page accessible through:
-- Right-click the extension icon → Options
-- Or navigate to `chrome://extensions/` → X Clean → Extension options
+- Collect personal information
+- Track browsing activity
+- Send data to external servers
+- Access your Twitter/X account data
+- Modify your posts or interactions
 
-### Settings Categories
+## 🔍 Security Features
 
-1. **Hide Elements**: Control visibility of promotional and unwanted elements
-2. **Hide Navigation**: Customize which navigation tabs are visible
-3. **Hide Notices**: Remove various notification and notice elements
-4. **Layout Settings**: Adjust the visual layout and spacing
+- Content Security Policy (CSP) implementation
+- Minimal permission requests
+- Local-only operation
+- No external network requests
+- Domain-restricted functionality
 
-## Permissions
+## 📄 Privacy Policy
 
-The extension requires the following permissions:
-- **Storage**: To save your preferences
-- **Clipboard Write**: To modify copied links
-- **Tabs**: To reload tabs after settings changes
+This extension operates with complete privacy protection:
+- No data collection or transmission
+- All preferences stored locally
+- No third-party integrations
+- No tracking or analytics
 
-## Host Permissions
+For detailed information, see [privacy.html](privacy.html).
 
-The extension works on:
-- `https://x.com/*`
-- `https://twitter.com/*`
+## 🛠️ Development
 
-## Development
+This extension is built with:
+- Manifest V3
+- Vanilla JavaScript
+- Chrome Extension APIs
+- CSS for UI modifications
 
-### Project Structure
-```
-x-clean/
-├── manifest.json          # Extension manifest
-├── content/
-│   └── content.js         # Main content script
-├── popup/
-│   ├── popup.html         # Popup interface
-│   ├── popup.css          # Popup styles
-│   └── popup.js           # Popup functionality
-├── options/
-│   └── options.js         # Options page functionality
-├── _locales/              # Internationalization
-│   ├── en/               # English
-│   ├── zh_TW/            # Traditional Chinese
-│   ├── zh_CN/            # Simplified Chinese
-│   └── ja/               # Japanese
-└── icons/                # Extension icons
-```
+## 📝 License
 
-### Building
+This project is open source. Please ensure you comply with Twitter/X's terms of service when using this extension.
 
-No build process required. The extension can be loaded directly as an unpacked extension.
+## ⚠️ Disclaimer
 
-## License
-
-MIT
-
-## Support
-
-If you encounter any issues or have feature requests, please open an issue on the GitHub repository.
-
-## Changelog
-
-### Version 1.0.0
-- Initial release
-- Hide various X/Twitter elements
-- Customizable layout options
-- Multi-language support
-- Link replacement functionality
+This extension is not affiliated with Twitter/X. It's a third-party tool designed to improve user experience by hiding unwanted UI elements. Use at your own discretion and ensure compliance with platform terms of service.
