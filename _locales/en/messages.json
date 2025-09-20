@@ -1,0 +1,26 @@
+{
+  "extName": {"message": "X/Twitter Clean menu and sidebar"},
+  "extDescription": {"message": "Hidden Menu, Grok, Premium, Verified, Explore, Notices, Messages, Communities, Bookmarks, Sidebar, Mute, Settings"},
+  "actionTitle": {"message": "X Clean"},
+  "settings": {"message": "Settings"},
+  "save": {"message": "Save"},
+  "hideGrok": {"message": "Hide Grok"},
+  "hidePremiumSignUp": {"message": "Hide Premium Sign-up"},
+  "hideSelectors": {"message": "Hide Subscribe Message"},
+  "hideVerifiedOrgs": {"message": "Hide Verified Orgs"},
+  "hideExplore": {"message": "Hide Explore"},
+  "hideNotifications": {"message": "Hide Notifications"},
+  "hideMessages": {"message": "Hide Messages"},
+  "hideCommunities": {"message": "Hide Communities"},
+  "hideBookmarks": {"message": "Hide Bookmarks"},
+  "hideother": {"message": "Hide other"},
+  "hideMutedNotices": {"message": "Hide Muted Account Notices"},
+  "hideRightColumn": {"message": "Hide Right Column"},
+  "useLargerCSS": {"message": "Larger Post Area"},
+  "cssWidth": {"message": "Custom width"},
+  "useCustomPadding": {"message": "Right Sidebar Spacing"},
+  "paddingWidth": {"message": "Padding Width"}
+  ,"replaceCopiedLink": {"message": "Change copied x.com to twitter.com"}
+}
+
+

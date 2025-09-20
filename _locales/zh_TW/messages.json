@@ -1,0 +1,26 @@
+{
+  "extName": {"message": "X/Twitter 乾淨的選單和側邊欄"},
+  "extDescription": {"message": "乾淨的 選單、Grok、高級訂閱、已認證組織、其他、探索、通知、訊息、社群、書籤、右側邊欄、靜音通知和可自訂設定"},
+  "actionTitle": {"message": "X Clean"},
+  "settings": {"message": "設定"},
+  "save": {"message": "保存"},
+  "hideGrok": {"message": "隱藏 Grok"},
+  "hidePremiumSignUp": {"message": "隱藏 高級訂閱"},
+  "hideSelectors": {"message": "隱藏 訂閱訊息"},
+  "hideVerifiedOrgs": {"message": "隱藏 已認證組織"},
+  "hideExplore": {"message": "隱藏 探索"},
+  "hideNotifications": {"message": "隱藏 通知"},
+  "hideMessages": {"message": "隱藏 訊息"},
+  "hideCommunities": {"message": "隱藏 社群"},
+  "hideBookmarks": {"message": "隱藏 書籤"},
+  "hideother": {"message": "隱藏 其他"},
+  "hideMutedNotices": {"message": "隱藏 靜音帳戶通知"},
+  "hideRightColumn": {"message": "隱藏 右側邊欄"},
+  "useLargerCSS": {"message": "更大貼文區域"},
+  "cssWidth": {"message": "自訂寬度"},
+  "useCustomPadding": {"message": "右側邊欄間距"},
+  "paddingWidth": {"message": "間距寬度"}
+  ,"replaceCopiedLink": {"message": "將複製的 x.com 改為 twitter.com"}
+}
+
+

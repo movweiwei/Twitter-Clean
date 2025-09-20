@@ -1,0 +1,26 @@
+{
+  "extName": {"message": "X/Twitter 干净的选单和侧边栏"},
+  "extDescription": {"message": "干净的 选单、Grok、高级订阅、已认证组织、其他、探索、通知、私信、书签、右侧边栏、静音通知和可自订设定"},
+  "actionTitle": {"message": "X Clean"},
+  "settings": {"message": "设置"},
+  "save": {"message": "保存"},
+  "hideGrok": {"message": "隐藏 Grok"},
+  "hidePremiumSignUp": {"message": "隐藏 高级订阅"},
+  "hideSelectors": {"message": "隐藏 订阅消息"},
+  "hideVerifiedOrgs": {"message": "隐藏 已认证组织"},
+  "hideExplore": {"message": "隐藏 探索"},
+  "hideNotifications": {"message": "隐藏 通知"},
+  "hideMessages": {"message": "隐藏 私信"},
+  "hideCommunities": {"message": "隐藏 社群"},
+  "hideBookmarks": {"message": "隐藏 书签"},
+  "hideother": {"message": "隐藏 其他"},
+  "hideMutedNotices": {"message": "隐藏 静音账户通知"},
+  "hideRightColumn": {"message": "隐藏 右侧边栏"},
+  "useLargerCSS": {"message": "更大帖子区域"},
+  "cssWidth": {"message": "自定义宽度"},
+  "useCustomPadding": {"message": "右侧边栏间距"},
+  "paddingWidth": {"message": "间距宽度"}
+  ,"replaceCopiedLink": {"message": "将复制的 x.com 改为 twitter.com"}
+}
+
+

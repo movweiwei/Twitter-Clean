@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>X Clean</title>
+  <link rel="stylesheet" href="popup.css">
+  <script defer src="popup.js"></script>
+  <style>
+    @font-face{font-family:"Noto Sans JP";src:local("Noto Sans JP"),local("NotoSansJP");font-display:swap}
+  </style>
+  </head>
+<body>
+  <div class="container">
+    <header class="header" data-i18n="settings">Settings</header>
+    <section class="grid">
+      <label class="row"><input type="checkbox" id="replaceCopiedLink"><span data-i18n="replaceCopiedLink">Change copied x.com to twitter.com</span></label>
+      <label class="row"><input type="checkbox" id="hideGrok"><span data-i18n="hideGrok">Hide Grok</span></label>
+      <label class="row"><input type="checkbox" id="hidePremiumSignUp"><span data-i18n="hidePremiumSignUp">Hide Premium Sign-up</span></label>
+      <label class="row"><input type="checkbox" id="hideSelectors"><span data-i18n="hideSelectors">Hide Subscribe Message</span></label>
+      <label class="row"><input type="checkbox" id="hideVerifiedOrgs"><span data-i18n="hideVerifiedOrgs">Hide Verified Orgs</span></label>
+      <label class="row"><input type="checkbox" id="hideother"><span data-i18n="hideother">Hide other</span></label>
+      <label class="row"><input type="checkbox" id="hideExplore"><span data-i18n="hideExplore">Hide Explore</span></label>
+      <label class="row"><input type="checkbox" id="hideNotifications"><span data-i18n="hideNotifications">Hide Notifications</span></label>
+      <label class="row"><input type="checkbox" id="hideMessages"><span data-i18n="hideMessages">Hide Messages</span></label>
+      <label class="row"><input type="checkbox" id="hideCommunities"><span data-i18n="hideCommunities">Hide Communities</span></label>
+      <label class="row"><input type="checkbox" id="hideBookmarks"><span data-i18n="hideBookmarks">Hide Bookmarks</span></label>
+      <label class="row"><input type="checkbox" id="hideMutedNotices"><span data-i18n="hideMutedNotices">Hide Muted Account Notices</span></label>
+      <label class="row"><input type="checkbox" id="hideRightColumn"><span data-i18n="hideRightColumn">Hide Right Column</span></label>
+      <label class="row"><input type="checkbox" id="useLargerCSS"><span data-i18n="useLargerCSS">Larger Post Area</span></label>
+      <div class="row input"><span data-i18n="cssWidth">Custom width</span><div class="input-wrapper"><input type="number" id="cssWidth" min="400" max="1200"><span class="unit">px</span></div></div>
+      <label class="row"><input type="checkbox" id="useCustomPadding"><span data-i18n="useCustomPadding">Right Sidebar Spacing</span></label>
+      <div class="row input"><span data-i18n="paddingWidth">Padding Width</span><div class="input-wrapper"><input type="number" id="paddingWidth" min="0" max="100"><span class="unit">px</span></div></div>
+    </section>
+    <footer class="footer">
+      <button id="save" class="primary" data-i18n="save">Save</button>
+    </footer>
+  </div>
+</body>
+</html>
+
+

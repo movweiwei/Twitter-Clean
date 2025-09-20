@@ -1,0 +1,33 @@
+body{margin:0;font-family:"Noto Sans JP",system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Hiragino Kaku Gothic ProN","Yu Gothic UI",sans-serif;color:#0f1419;font-size:15px;background:#f7f9fa;min-height:100vh}
+.wrap{max-width:900px;margin:0 auto;padding:32px;background:#fff;min-height:100vh;box-shadow:0 0 20px rgba(0,0,0,0.08)}
+h1{font-size:24px;font-weight:700;margin-bottom:8px;color:#0f1419}
+p{color:#536471;font-size:16px;margin-bottom:24px}
+#mount{margin-top:24px}
+.section{margin-bottom:32px}
+.section-title{font-size:18px;font-weight:600;margin-bottom:16px;color:#0f1419;padding-bottom:8px;border-bottom:2px solid #e1e8ed}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.row{display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:14px;background:#fff;border:1px solid #e1e8ed;transition:all 0.2s}
+.row:hover{background:#f6f8fa;border-color:#1d9bf0;box-shadow:0 2px 8px rgba(29,155,240,0.1)}
+.input-wrapper{position:relative;display:flex;align-items:center}
+input[type=number]{width:110px;padding:10px 30px 10px 16px;border:1px solid #cfd9de;border-radius:9999px;text-align:center;font-size:14px;background:#fff}
+input[type=number]:focus{outline:none;border-color:#1d9bf0;box-shadow:0 0 0 2px rgba(29,155,240,0.2)}
+.unit{position:absolute;right:12px;font-size:14px;color:#536471;pointer-events:none}
+.actions{margin-top:24px;display:flex;justify-content:center;gap:12px}
+.primary{appearance:none;border:none;background:#1d9bf0;color:#fff;padding:14px 28px;border-radius:9999px;font-weight:700;cursor:pointer;font-size:16px;transition:background-color 0.2s}
+.primary:hover{background:#1a8cd8}
+
+/* Custom scrollbar - Japanese style */
+::-webkit-scrollbar{width:12px}
+::-webkit-scrollbar-track{background:#f7f9fa;border-radius:8px;border:1px solid #e1e8ed}
+::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#1d9bf0 0%,#1a8cd8 100%);border-radius:8px;border:2px solid #f7f9fa;box-shadow:0 2px 4px rgba(29,155,240,0.2)}
+::-webkit-scrollbar-thumb:hover{background:linear-gradient(180deg,#1a8cd8 0%,#1581c7 100%);box-shadow:0 4px 8px rgba(29,155,240,0.3)}
+::-webkit-scrollbar-thumb:active{background:linear-gradient(180deg,#1581c7 0%,#0f6bb3 100%)}
+::-webkit-scrollbar-corner{background:#f7f9fa}
+
+/* Elegant toggle switches */
+.row input[type="checkbox"]{appearance:none;width:44px;height:26px;background:#cfd9de;border-radius:26px;position:relative;outline:none;cursor:pointer;flex-shrink:0;transition:background-color 0.25s}
+.row input[type="checkbox"]:after{content:"";position:absolute;left:3px;bottom:3px;width:20px;height:20px;background:#fff;border-radius:50%;transition:transform 0.25s;box-shadow:0 2px 4px rgba(0,0,0,0.2)}
+.row input[type="checkbox"]:checked{background:#1d9bf0}
+.row input[type="checkbox"]:checked:after{transform:translateX(18px)}
+
+

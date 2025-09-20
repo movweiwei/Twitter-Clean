@@ -1,0 +1,26 @@
+{
+  "extName": {"message": "X/Twitter きれいなメニューとサイドバー"},
+  "extDescription": {"message": "清潔なメニュー、Grok、高度なサブスクリプション、認証済み組織、他の、探索、通知、メッセージ、コミュニティ、ブックマーク、右側カラム、ミュート通知、およびカスタム設定"},
+  "actionTitle": {"message": "X Clean"},
+  "settings": {"message": "設定"},
+  "save": {"message": "保存"},
+  "hideGrok": {"message": "Grokを非表示"},
+  "hidePremiumSignUp": {"message": "プレミアムを非表示"},
+  "hideSelectors": {"message": "サブスクメッセージを非表示"},
+  "hideVerifiedOrgs": {"message": "認証済み組織を非表示"},
+  "hideExplore": {"message": "話題を検索を非表示"},
+  "hideNotifications": {"message": "通知を非表示"},
+  "hideMessages": {"message": "メッセージを非表示"},
+  "hideCommunities": {"message": "コミュニティを非表示"},
+  "hideBookmarks": {"message": "ブックマークを非表示"},
+  "hideother": {"message": "その他を非表示"},
+  "hideMutedNotices": {"message": "ミュート通知を非表示"},
+  "hideRightColumn": {"message": "右カラムを非表示"},
+  "useLargerCSS": {"message": "広い投稿エリア"},
+  "cssWidth": {"message": "カスタム幅"},
+  "useCustomPadding": {"message": "右サイドバー間隔"},
+  "paddingWidth": {"message": "パディング幅"}
+  ,"replaceCopiedLink": {"message": "コピーした x.com を twitter.com に置換"}
+}
+
+

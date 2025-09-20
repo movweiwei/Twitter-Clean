@@ -1,0 +1,29 @@
+*{box-sizing:border-box}
+body{margin:0;font-family:"Noto Sans JP",system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Hiragino Kaku Gothic ProN","Yu Gothic UI",sans-serif;color:#0f1419;font-size:15px}
+.container{width:400px;max-width:100%;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 8px 30px rgba(0,0,0,0.12)}
+.header{padding:18px 20px;font-weight:700;border-bottom:1px solid rgba(0,0,0,.08);text-align:center;font-size:18px}
+.grid{display:grid;grid-template-columns:1fr;gap:8px;padding:16px 20px}
+.row{display:flex;align-items:center;gap:14px;padding:12px 14px;border-radius:14px;font-size:15px}
+.row:hover{background:#f6f8fa}
+.row.input{justify-content:space-between}
+.input-wrapper{position:relative;display:flex;align-items:center}
+input[type=number]{width:100px;padding:10px 30px 10px 16px;border:1px solid #cfd9de;border-radius:9999px;text-align:center;font-size:14px}
+.unit{position:absolute;right:12px;font-size:14px;color:#536471;pointer-events:none}
+.footer{display:flex;justify-content:center;padding:16px 20px;border-top:1px solid rgba(0,0,0,.08)}
+.primary{appearance:none;border:none;background:#1d9bf0;color:#fff;padding:12px 24px;border-radius:9999px;font-weight:700;cursor:pointer;font-size:15px}
+.primary:hover{background:#1a8cd8}
+
+/* Elegant toggle, similar to original panel */
+.row input[type="checkbox"]{appearance:none;width:44px;height:26px;background:#cfd9de;border-radius:26px;position:relative;outline:none;cursor:pointer;flex-shrink:0}
+.row input[type="checkbox"]:after{content:"";position:absolute;left:3px;bottom:3px;width:20px;height:20px;background:#fff;border-radius:50%;transition:.25s}
+.row input[type="checkbox"]:checked{background:#1d9bf0}
+.row input[type="checkbox"]:checked:after{transform:translateX(18px)}
+
+/* Custom scrollbar - Japanese style */
+::-webkit-scrollbar{width:8px}
+::-webkit-scrollbar-track{background:#f6f8fa;border-radius:6px}
+::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#1d9bf0 0%,#1a8cd8 100%);border-radius:6px;border:1px solid #f6f8fa;box-shadow:0 1px 3px rgba(29,155,240,0.2)}
+::-webkit-scrollbar-thumb:hover{background:linear-gradient(180deg,#1a8cd8 0%,#1581c7 100%);box-shadow:0 2px 6px rgba(29,155,240,0.3)}
+::-webkit-scrollbar-corner{background:#f6f8fa}
+
+
