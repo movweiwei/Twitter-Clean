@@ -86,6 +86,32 @@
         const parent = el.closest('div');
         if (parent) parent.remove();
       });
+	  
+                const additionalElements = document.querySelectorAll('.css-175oi2r.r-1habvwh.r-1ssbvtb.r-1mmae3n.r-3pj75a');
+                additionalElements.forEach(element => {
+                    const parentDiv = element.closest('div');
+                    if (parentDiv) {
+                        parentDiv.remove();
+                    }
+                });
+
+                const superUpsellElements = document.querySelectorAll('div[data-testid="super-upsell-UpsellCardRenderProperties"]');
+                superUpsellElements.forEach(element => {
+                    const parentDiv = element.closest('div.css-175oi2r.r-1ifxtd0');
+                    if (parentDiv) {
+                        parentDiv.remove();
+                    } else {
+                        element.remove();
+                    }
+                });
+
+                const superUpsellContainers = document.querySelectorAll('div.css-175oi2r.r-1ifxtd0');
+                superUpsellContainers.forEach(container => {
+                    const hasSuperUpsell = container.querySelector('div[data-testid="super-upsell-UpsellCardRenderProperties"]');
+                    if (hasSuperUpsell) {
+                        container.remove();
+                    }
+                });
 
       const verifiedUpsell = document.querySelectorAll('.css-175oi2r.r-yfoy6g.r-18bvks7.r-1867qdf.r-1phboty.r-rs99b7.r-1ifxtd0.r-1udh08x[data-testid="verified_profile_upsell"]');
       verifiedUpsell.forEach(el => {
@@ -94,7 +120,7 @@
       });
     });
     observer.observe(document.body, { childList: true, subtree: true });
-    addGlobalStyle('.css-175oi2r.r-1xpp3t0{display:none!important}.css-175oi2r.r-yfoy6g.r-18bvks7.r-1q9bdsx.r-rs99b7{display:none!important}');
+    addGlobalStyle('.css-175oi2r.r-1xpp3t0{display:none!important}.css-175oi2r.r-yfoy6g.r-18bvks7.r-1q9bdsx.r-rs99b7{display:none!important}.css-175oi2r.r-1habvwh.r-1ssbvtb.r-1mmae3n.r-3pj75a { display: none !important; }');
   }
 
   function initHideGrok() {
