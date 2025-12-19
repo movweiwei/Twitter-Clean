@@ -172,6 +172,9 @@
     if (settings.hideVerifiedOrgs) css += 'a[href="/i/verified-orgs-signup"]{display:none!important}';
     if (settings.hideother) {
       css += 'a[href="/jobs"]{display:none!important}';
+	  css += 'a[href="/i/premium-business"] { display: none !important; }';
+	  css += 'a[href="https://ads.twitter.com/?ref=gl-tw-tw-twitter-ads-rweb"] { display: none !important; }';
+	  css += 'a[href="https://ads.x.com/?ref=gl-tw-tw-twitter-ads-rweb"] { display: none !important; }';
       css += '.css-175oi2r.r-l00any.r-109y4c4.r-kuekak{display:none!important}';
       css += 'a.css-175oi2r.r-5oul0u.r-knv0ih.r-faml9v.r-2dysd3.r-13qz1uu.r-o7ynqc.r-6416eg.r-1ny4l3l.r-1loqt21{display:none!important}';
       css += 'a.css-175oi2r.r-5oul0u.r-1wzrnnt.r-1c4vpko.r-1c7gwzm.r-13qz1uu.r-o7ynqc.r-6416eg.r-1ny4l3l.r-1loqt21{display:none!important}';

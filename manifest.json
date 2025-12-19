@@ -2,8 +2,8 @@
   "manifest_version": 3,
   "name": "__MSG_extName__",
   "description": "__MSG_extDescription__",
-  "version": "1.0.3",
-  "author": "Movwei",
+  "version": "1.0.4",
+  "author": "Pocktuc",
   "default_locale": "en",
   "icons": {
     "128": "icons/icon128.png"
