@@ -144,6 +144,33 @@
       document.querySelectorAll('button[data-testid="grokImgGen"]').forEach(btn => btn.remove());
     });
     observer.observe(document.body, { childList: true, subtree: true });
+	
+    const targetEditImagePathD1 = "M17.084 7.5c0-1.163 0-1.744-.144-2.218-.323-1.065-1.157-1.899-2.222-2.222-.473-.143-1.055-.143-2.218-.143H8.25c-1.867 0-2.8 0-3.513.363-.627.32-1.137.83-1.457 1.457-.363.713-.363 1.646-.363 3.513v4.25c0 1.163 0 1.745.144 2.218.323 1.065 1.156 1.899 2.222 2.222.473.143 1.054.143 2.217.143";
+    const targetEditImagePathD2 = "M2.917 12.5l3.75-3.333 2.917 2.916";
+    const targetEditImagePathD3 = "M17.56 10.894c-.644-.645-1.684-.659-2.346-.032l-3.656 3.463c-.6.568-.968 1.34-1.031 2.164l-.11 1.428 1.479-.114c.793-.061 1.539-.404 2.101-.967l3.564-3.563c.657-.657.657-1.722 0-2.38z";
+
+    const observerEditImage = new MutationObserver(mutations => {
+        mutations.forEach(() => {
+           const svgs = document.querySelectorAll('svg[viewBox="0 0 20 20"].r-4qtqp9.r-yyyyoo.r-1xvli5t.r-dnmrzs.r-bnwqim.r-lrvibr.r-m6rgpd');
+            svgs.forEach(svg => {
+                const paths = svg.querySelectorAll('path');
+                let matchCount = 0;
+                paths.forEach(path => {
+                    const d = path.getAttribute('d');
+                    if (d === targetEditImagePathD1 || d === targetEditImagePathD2 || d === targetEditImagePathD3) {
+                         matchCount++;
+                }
+            });
+                    if (matchCount >= 3) {
+                    const container = svg.closest('a[href^="/i/imagine"]');
+                    if (container) {
+                         container.remove();
+                    }
+                  }
+              });
+          });
+      });
+    observerEditImage.observe(document.body, { childList: true, subtree: true });
     addGlobalStyle('a[href="/i/grok"]{display:none!important}.css-175oi2r.r-1867qdf.r-xnswec.r-13awgt0.r-1ce3o0f.r-1udh08x.r-u8s1d.r-13qz1uu.r-173mn98.r-1e5uvyk.r-ii8lfi.r-40lpo0.r-rs99b7.r-12jitg0{display:none}.css-175oi2r.r-16y2uox.r-1wbh5a2.r-tzz3ar.r-1pi2tsx.r-buy8e9.r-mfh4gg.r-2eszeu.r-10m9thr.r-lltvgl.r-18u37iz.r-9aw3ui{display:none}.css-175oi2r.r-1s2bzr4.r-dnmrzs.r-bnwqim{display:none}');
   }
 
