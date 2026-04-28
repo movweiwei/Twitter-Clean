@@ -16,6 +16,8 @@
   "hideother": {"message": "その他を非表示"},
   "hideMutedNotices": {"message": "ミュート通知を非表示"},
   "hideRightColumn": {"message": "右カラムを非表示"},
+  "hideChatButton": {"message": "フローティングチャットを非表示"},
+  "hideCreatorsStudio": {"message": "クリエイタースタジオを非表示"},
   "useLargerCSS": {"message": "広い投稿エリア"},
   "cssWidth": {"message": "カスタム幅"},
   "useCustomPadding": {"message": "右サイドバー間隔"},

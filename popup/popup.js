@@ -12,6 +12,8 @@ const DEFAULTS = {
   hideCommunities: false,
   hideMutedNotices: false,
   hideRightColumn: false,
+  hideChatButton: false,
+  hideCreatorsStudio: false,
   useLargerCSS: false,
   cssWidth: 680,
   useCustomPadding: false,
@@ -58,6 +60,10 @@ function applyI18n(){
 }
 
 document.addEventListener('DOMContentLoaded', ()=>{
+  const manifest = chrome.runtime.getManifest();
+  const versionTag = byId('versionTag');
+  if (versionTag) versionTag.textContent = `v${manifest.version}`;
+
   applyI18n();
   load();
   byId('save').addEventListener('click', save)

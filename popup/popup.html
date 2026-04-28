@@ -12,7 +12,10 @@
   </head>
 <body>
   <div class="container">
-    <header class="header" data-i18n="settings">Settings</header>
+    <header class="header">
+      <span data-i18n="settings">Settings</span>
+      <span id="versionTag" class="version-tag"></span>
+    </header>
     <section class="grid">
       <label class="row"><input type="checkbox" id="replaceCopiedLink"><span data-i18n="replaceCopiedLink">Change copied x.com to twitter.com</span></label>
       <label class="row"><input type="checkbox" id="hideGrok"><span data-i18n="hideGrok">Hide Grok</span></label>
@@ -27,6 +30,8 @@
       <label class="row"><input type="checkbox" id="hideBookmarks"><span data-i18n="hideBookmarks">Hide Bookmarks</span></label>
       <label class="row"><input type="checkbox" id="hideMutedNotices"><span data-i18n="hideMutedNotices">Hide Muted Account Notices</span></label>
       <label class="row"><input type="checkbox" id="hideRightColumn"><span data-i18n="hideRightColumn">Hide Right Column</span></label>
+      <label class="row"><input type="checkbox" id="hideChatButton"><span data-i18n="hideChatButton">Hide Floating Chat</span></label>
+      <label class="row"><input type="checkbox" id="hideCreatorsStudio"><span data-i18n="hideCreatorsStudio">Hide Creators Studio</span></label>
       <label class="row"><input type="checkbox" id="useLargerCSS"><span data-i18n="useLargerCSS">Larger Post Area</span></label>
       <div class="row input"><span data-i18n="cssWidth">Custom width</span><div class="input-wrapper"><input type="number" id="cssWidth" min="400" max="1200"><span class="unit">px</span></div></div>
       <label class="row"><input type="checkbox" id="useCustomPadding"><span data-i18n="useCustomPadding">Right Sidebar Spacing</span></label>

@@ -16,6 +16,8 @@
   "hideother": {"message": "Hide other"},
   "hideMutedNotices": {"message": "Hide Muted Account Notices"},
   "hideRightColumn": {"message": "Hide Right Column"},
+  "hideChatButton": {"message": "Hide Floating Chat"},
+  "hideCreatorsStudio": {"message": "Hide Creators Studio"},
   "useLargerCSS": {"message": "Larger Post Area"},
   "cssWidth": {"message": "Custom width"},
   "useCustomPadding": {"message": "Right Sidebar Spacing"},

@@ -1,19 +1,11 @@
 (function() {
   'use strict';
 
-  // IMMEDIATE EXIT if not on Twitter/X domains
   const hostname = window.location.hostname;
-  const url = window.location.href;
-  const isTwitterDomain = (hostname === 'twitter.com' || hostname === 'x.com' || 
-                           hostname.endsWith('.twitter.com') || hostname.endsWith('.x.com')) &&
-                          (url.includes('twitter.com') || url.includes('x.com'));
-  
-  if (!isTwitterDomain) {
-    console.log('X Clean: Not on Twitter/X domain, exiting immediately. Current URL:', url);
-    return;
-  }
-  
-  console.log('X Clean: Running on Twitter/X domain:', url);
+  const isTwitterDomain = hostname === 'twitter.com' || hostname === 'x.com' ||
+    hostname.endsWith('.twitter.com') || hostname.endsWith('.x.com');
+
+  if (!isTwitterDomain) return;
 
   const DEFAULTS = {
     replaceCopiedLink: true,
@@ -29,6 +21,8 @@
     hideCommunities: false,
     hideMutedNotices: false,
     hideRightColumn: false,
+    hideChatButton: false,
+    hideCreatorsStudio: false,
     useLargerCSS: false,
     cssWidth: 680,
     useCustomPadding: false,
@@ -47,136 +41,141 @@
     });
   }
 
-  // Feature 1: Replace copied links x.com -> twitter.com
+  function addGlobalStyle(css) {
+    const style = document.createElement('style');
+    style.type = 'text/css';
+    style.textContent = css;
+    document.documentElement.appendChild(style);
+  }
+
   function handleCopyFix() {
     if (!settings.replaceCopiedLink) return;
     document.addEventListener('copy', () => {
       try {
         const selection = window.getSelection().toString();
         if (selection && selection.startsWith('https://x.com/')) {
-          const modified = selection.replace('https://x.com/', 'https://twitter.com/');
-          navigator.clipboard.writeText(modified).catch(() => {});
+          navigator.clipboard.writeText(selection.replace('https://x.com/', 'https://twitter.com/')).catch(() => {});
         }
-      } catch (e) {}
+      } catch (_) {}
     });
   }
 
-  // Utilities
-  function addGlobalStyle(css) {
-    // Only apply styles on Twitter/X domains
-    if (!checkTwitterDomain()) return null;
-    
-    const style = document.createElement('style');
-    style.textContent = css;
-    document.documentElement.appendChild(style);
-    return style;
-  }
-
-  function checkTwitterDomain() {
-    // Since we already checked at the top, just return true
-    return true;
-  }
-
-  // Observers that mirror the userscript behaviors
   function initHideSelectors() {
-    if (!settings.hideSelectors || !checkTwitterDomain()) return;
+    if (!settings.hideSelectors) return;
     const observer = new MutationObserver(() => {
       const elements = document.querySelectorAll('.css-175oi2r.r-1habvwh.r-eqz5dr.r-uaa2di.r-1mmae3n.r-3pj75a.r-bnwqim');
-      elements.forEach(el => {
-        const parent = el.closest('div');
-        if (parent) parent.remove();
+      elements.forEach(element => {
+        const parentDiv = element.closest('div');
+        if (parentDiv) parentDiv.remove();
       });
-	  
-                const additionalElements = document.querySelectorAll('.css-175oi2r.r-1habvwh.r-1ssbvtb.r-1mmae3n.r-3pj75a');
-                additionalElements.forEach(element => {
-                    const parentDiv = element.closest('div');
-                    if (parentDiv) {
-                        parentDiv.remove();
-                    }
-                });
 
-                const superUpsellElements = document.querySelectorAll('div[data-testid="super-upsell-UpsellCardRenderProperties"]');
-                superUpsellElements.forEach(element => {
-                    const parentDiv = element.closest('div.css-175oi2r.r-1ifxtd0');
-                    if (parentDiv) {
-                        parentDiv.remove();
-                    } else {
-                        element.remove();
-                    }
-                });
+      const additionalElements = document.querySelectorAll('.css-175oi2r.r-1habvwh.r-1ssbvtb.r-1mmae3n.r-3pj75a');
+      additionalElements.forEach(element => {
+        const parentDiv = element.closest('div');
+        if (parentDiv) parentDiv.remove();
+      });
 
-                const superUpsellContainers = document.querySelectorAll('div.css-175oi2r.r-1ifxtd0');
-                superUpsellContainers.forEach(container => {
-                    const hasSuperUpsell = container.querySelector('div[data-testid="super-upsell-UpsellCardRenderProperties"]');
-                    if (hasSuperUpsell) {
-                        container.remove();
-                    }
-                });
+      const asideElements = document.querySelectorAll('aside.css-175oi2r.r-1habvwh.r-eqz5dr.r-uaa2di.r-w7s2jr.r-u9wvl5.r-bnwqim');
+      asideElements.forEach(element => {
+        const parentDiv = element.closest('div');
+        if (parentDiv) parentDiv.remove();
+      });
+
+      const asideElementsNew = document.querySelectorAll('aside.css-g5y9jx.r-1habvwh.r-eqz5dr.r-uaa2di.r-w7s2jr.r-u9wvl5.r-bnwqim');
+      asideElementsNew.forEach(element => {
+        const parentDiv = element.closest('div');
+        if (parentDiv) parentDiv.remove();
+        else element.remove();
+      });
+
+      const superUpsellElements = document.querySelectorAll('div[data-testid="super-upsell-UpsellCardRenderProperties"]');
+      superUpsellElements.forEach(element => {
+        const parentDiv = element.closest('div.css-175oi2r.r-1ifxtd0');
+        if (parentDiv) parentDiv.remove();
+        else element.remove();
+      });
+
+      const superUpsellContainers = document.querySelectorAll('div.css-175oi2r.r-1ifxtd0');
+      superUpsellContainers.forEach(container => {
+        if (container.querySelector('div[data-testid="super-upsell-UpsellCardRenderProperties"]')) {
+          container.remove();
+        }
+      });
 
       const verifiedUpsell = document.querySelectorAll('.css-175oi2r.r-yfoy6g.r-18bvks7.r-1867qdf.r-1phboty.r-rs99b7.r-1ifxtd0.r-1udh08x[data-testid="verified_profile_upsell"]');
-      verifiedUpsell.forEach(el => {
-        const parent = el.closest('div');
-        if (parent) parent.remove(); else el.remove();
+      verifiedUpsell.forEach(element => {
+        const parentDiv = element.closest('div');
+        if (parentDiv) parentDiv.remove();
+        else element.remove();
       });
     });
+
     observer.observe(document.body, { childList: true, subtree: true });
-    addGlobalStyle('.css-175oi2r.r-1xpp3t0{display:none!important}.css-175oi2r.r-yfoy6g.r-18bvks7.r-1q9bdsx.r-rs99b7{display:none!important}.css-175oi2r.r-1habvwh.r-1ssbvtb.r-1mmae3n.r-3pj75a { display: none !important; }');
+    addGlobalStyle(`
+      .css-175oi2r.r-1xpp3t0 { display: none !important; }
+      .css-175oi2r.r-yfoy6g.r-18bvks7.r-1q9bdsx.r-rs99b7 { display: none !important; }
+      .css-175oi2r.r-1habvwh.r-1ssbvtb.r-1mmae3n.r-3pj75a { display: none !important; }
+    `);
   }
 
   function initHideGrok() {
-    if (!settings.hideGrok || !checkTwitterDomain()) return;
-    const targetPathD = "M2.205 7.423L11.745 21h4.241L6.446 7.423H2.204zm4.237 7.541L2.2 21h4.243l2.12-3.017-2.121-3.02zM16.957 0L9.624 10.435l2.122 3.02L21.2 0h-4.243zm.767 6.456V21H21.2V1.51l-3.476 4.946z";
-    const targetGrokImageGenPathD = "M12.745 20.54l10.97-8.19c.539-.4 1.307-.244 1.564.38 1.349 3.288.746 7.241-1.938 9.955-2.683 2.714-6.417 3.31-9.83 1.954l-3.728 1.745c5.347 3.697 11.84 2.782 15.898-1.324 3.219-3.255 4.216-7.692 3.284-11.693l.008.009c-1.351-5.878.332-8.227 3.782-13.031L33 0l-4.54 4.59v-.014L12.743 20.544M10.48 22.531c-3.837-3.707-3.175-9.446.1-12.755 2.42-2.449 6.388-3.448 9.852-1.979l3.72-1.737c-.67-.49-1.53-1.017-2.515-1.387-4.455-1.854-9.789-.931-13.41 2.728-3.483 3.523-4.579 8.94-2.697 13.561 1.405 3.454-.899 5.898-3.22 8.364C1.49 30.2.666 31.074 0 32l10.478-9.466";
-    const targetGrokNewPathD = "M12.745 20.54l10.97-8.19c.539-.4 1.307-.244 1.564.38 1.349 3.288.746 7.241-1.938 9.955-2.683 2.714-6.417 3.31-9.83 1.954l-3.728 1.745c5.347 3.697 11.84 2.782 15.898-1.324 3.219-3.255 4.216-7.692 3.284-11.693l.008.009c-1.351-5.878.332-8.227 3.782-13.031L33 0l-4.54 4.59v-.014L12.743 20.544m-2.263 1.987c-3.837-3.707-3.175-9.446.1-12.755 2.42-2.449 6.388-3.448 9.852-1.979l3.72-1.737c-.67-.49-1.53-1.017-2.515-1.387-4.455-1.854-9.789-.931-13.41 2.728-3.483 3.523-4.579 8.94-2.697 13.561 1.405 3.454-.899 5.898-3.22 8.364C1.49 30.2.666 31.074 0 32l10.478-9.466";
-    const observer = new MutationObserver(() => {
+    if (!settings.hideGrok) return;
+
+    const targetPathD = 'M2.205 7.423L11.745 21h4.241L6.446 7.423H2.204zm4.237 7.541L2.2 21h4.243l2.12-3.017-2.121-3.02zM16.957 0L9.624 10.435l2.122 3.02L21.2 0h-4.243zm.767 6.456V21H21.2V1.51l-3.476 4.946z';
+    const targetGrokImageGenPathD = 'M12.745 20.54l10.97-8.19c.539-.4 1.307-.244 1.564.38 1.349 3.288.746 7.241-1.938 9.955-2.683 2.714-6.417 3.31-9.83 1.954l-3.728 1.745c5.347 3.697 11.84 2.782 15.898-1.324 3.219-3.255 4.216-7.692 3.284-11.693l.008.009c-1.351-5.878.332-8.227 3.782-13.031L33 0l-4.54 4.59v-.014L12.743 20.544M10.48 22.531c-3.837-3.707-3.175-9.446.1-12.755 2.42-2.449 6.388-3.448 9.852-1.979l3.72-1.737c-.67-.49-1.53-1.017-2.515-1.387-4.455-1.854-9.789-.931-13.41 2.728-3.483 3.523-4.579 8.94-2.697 13.561 1.405 3.454-.899 5.898-3.22 8.364C1.49 30.2.666 31.074 0 32l10.478-9.466';
+    const targetGrokNewPathD = 'M12.745 20.54l10.97-8.19c.539-.4 1.307-.244 1.564.38 1.349 3.288.746 7.241-1.938 9.955-2.683 2.714-6.417 3.31-9.83 1.954l-3.728 1.745c5.347 3.697 11.84 2.782 15.898-1.324 3.219-3.255 4.216-7.692 3.284-11.693l.008.009c-1.351-5.878.332-8.227 3.782-13.031L33 0l-4.54 4.59v-.014L12.743 20.544m-2.263 1.987c-3.837-3.707-3.175-9.446.1-12.755 2.42-2.449 6.388-3.448 9.852-1.979l3.72-1.737c-.67-.49-1.53-1.017-2.515-1.387-4.455-1.854-9.789-.931-13.41 2.728-3.483 3.523-4.579 8.94-2.697 13.561 1.405 3.454-.899 5.898-3.22 8.364C1.49 30.2.666 31.074 0 32l10.478-9.466';
+
+    const isTranslateButtonContainer = svgElement => {
+      const wrapper = svgElement.closest('div[dir]');
+      if (!wrapper) return false;
+      const hasInlineActionButton = wrapper.querySelector('button[role="button"][type="button"]');
+      const hasGrokLink = wrapper.querySelector('a[href="/i/grok"], a[href^="/i/grok?"]');
+      const hasGrokDataTestId = wrapper.querySelector('[data-testid="grokImgGen"]');
+      return Boolean(hasInlineActionButton) && !hasGrokLink && !hasGrokDataTestId;
+    };
+
+    const removeGrokNodes = () => {
       const svgs = document.querySelectorAll('svg[aria-hidden="true"].r-4qtqp9');
       svgs.forEach(svg => {
         const path = svg.querySelector('path');
-        if (path) {
-          const pathD = path.getAttribute('d');
-          if (pathD === targetPathD || pathD === targetGrokImageGenPathD || pathD === targetGrokNewPathD) {
-            const container = svg.closest('button') || svg.closest('div');
-            if (container) container.remove();
-          }
-        }
+        if (!path) return;
+        const pathD = path.getAttribute('d');
+        const isGrokIcon = pathD === targetPathD || pathD === targetGrokNewPathD || pathD === targetGrokImageGenPathD;
+        if (!isGrokIcon || isTranslateButtonContainer(svg)) return;
+        const container = svg.closest('button') || svg.closest('a') || svg.closest('div');
+        if (container) container.remove();
       });
 
-      document.querySelectorAll('button[data-testid="grokImgGen"]').forEach(btn => btn.remove());
-    });
+      const grokLinks = document.querySelectorAll('a[href="/i/grok"], a[href^="/i/grok?"]');
+      grokLinks.forEach(link => {
+        const container = link.closest('li') || link.closest('div[data-testid="cellInnerDiv"]') || link;
+        container.remove();
+      });
+
+      const grokImgGenButtons = document.querySelectorAll('button[data-testid="grokImgGen"]');
+      grokImgGenButtons.forEach(button => {
+        const container = button.closest('div[data-testid="cellInnerDiv"]') || button;
+        container.remove();
+      });
+    };
+
+    const observer = new MutationObserver(removeGrokNodes);
     observer.observe(document.body, { childList: true, subtree: true });
-	
-    const targetEditImagePathD1 = "M17.084 7.5c0-1.163 0-1.744-.144-2.218-.323-1.065-1.157-1.899-2.222-2.222-.473-.143-1.055-.143-2.218-.143H8.25c-1.867 0-2.8 0-3.513.363-.627.32-1.137.83-1.457 1.457-.363.713-.363 1.646-.363 3.513v4.25c0 1.163 0 1.745.144 2.218.323 1.065 1.156 1.899 2.222 2.222.473.143 1.054.143 2.217.143";
-    const targetEditImagePathD2 = "M2.917 12.5l3.75-3.333 2.917 2.916";
-    const targetEditImagePathD3 = "M17.56 10.894c-.644-.645-1.684-.659-2.346-.032l-3.656 3.463c-.6.568-.968 1.34-1.031 2.164l-.11 1.428 1.479-.114c.793-.061 1.539-.404 2.101-.967l3.564-3.563c.657-.657.657-1.722 0-2.38z";
+    removeGrokNodes();
 
-    const observerEditImage = new MutationObserver(mutations => {
-        mutations.forEach(() => {
-           const svgs = document.querySelectorAll('svg[viewBox="0 0 20 20"].r-4qtqp9.r-yyyyoo.r-1xvli5t.r-dnmrzs.r-bnwqim.r-lrvibr.r-m6rgpd');
-            svgs.forEach(svg => {
-                const paths = svg.querySelectorAll('path');
-                let matchCount = 0;
-                paths.forEach(path => {
-                    const d = path.getAttribute('d');
-                    if (d === targetEditImagePathD1 || d === targetEditImagePathD2 || d === targetEditImagePathD3) {
-                         matchCount++;
-                }
-            });
-                    if (matchCount >= 3) {
-                    const container = svg.closest('a[href^="/i/imagine"]');
-                    if (container) {
-                         container.remove();
-                    }
-                  }
-              });
-          });
-      });
-    observerEditImage.observe(document.body, { childList: true, subtree: true });
-    addGlobalStyle('a[href="/i/grok"]{display:none!important}.css-175oi2r.r-1867qdf.r-xnswec.r-13awgt0.r-1ce3o0f.r-1udh08x.r-u8s1d.r-13qz1uu.r-173mn98.r-1e5uvyk.r-ii8lfi.r-40lpo0.r-rs99b7.r-12jitg0{display:none}.css-175oi2r.r-16y2uox.r-1wbh5a2.r-tzz3ar.r-1pi2tsx.r-buy8e9.r-mfh4gg.r-2eszeu.r-10m9thr.r-lltvgl.r-18u37iz.r-9aw3ui{display:none}.css-175oi2r.r-1s2bzr4.r-dnmrzs.r-bnwqim{display:none}');
+    addGlobalStyle(`
+      a[href="/i/grok"] { display: none !important; }
+      a[href^="/i/grok?"] { display: none !important; }
+      .css-175oi2r.r-105ug2t.r-1867qdf.r-qo02w8.r-13awgt0.r-1ce3o0f.r-1udh08x.r-u8s1d.r-13qz1uu.r-173mn98.r-1e5uvyk.r-5zmot.r-j7xza8.r-rs99b7.r-12jitg0 { display: none !important; }
+      .css-175oi2r.r-1867qdf.r-xnswec.r-13awgt0.r-1ce3o0f.r-1udh08x.r-u8s1d.r-13qz1uu.r-173mn98.r-1e5uvyk.r-ii8lfi.r-40lpo0.r-rs99b7.r-12jitg0 { display: none !important; }
+      .css-175oi2r.r-16y2uox.r-1wbh5a2.r-tzz3ar.r-1pi2tsx.r-buy8e9.r-mfh4gg.r-2eszeu.r-10m9thr.r-lltvgl.r-18u37iz.r-9aw3ui { display: none !important; }
+      .css-175oi2r.r-1s2bzr4.r-dnmrzs.r-bnwqim { display: none !important; }
+    `);
   }
 
   function initHideCommunities() {
-    if (!settings.hideCommunities || !checkTwitterDomain()) return;
-    const targetCommunitiesPathD = "M7.501 19.917L7.471 21H.472l.029-1.027c.184-6.618 3.736-8.977 7-8.977.963 0 1.95.212 2.87.672-.444.478-.851 1.03-1.212 1.656-.507-.204-1.054-.329-1.658-.329-2.767 0-4.57 2.223-4.938 6.004H7.56c-.023.302-.05.599-.059.917zm15.998.056L23.528 21H9.472l.029-1.027c.184-6.618 3.736-8.977 7-8.977s6.816 2.358 7 8.977zM21.437 19c-.367-3.781-2.17-6.004-4.938-6.004s-4.57 2.223-4.938 6.004h9.875zm-4.938-9c-.799 0-1.527-.279-2.116-.73-.836-.64-1.384-1.638-1.384-2.77 0-1.93 1.567-3.5 3.5-3.5s3.5 1.57 3.5 3.5c0 1.132-.548 2.13-1.384 2.77-.589.451-1.317.73-2.116.73zm-1.5-3.5c0 .827.673 1.5 1.5 1.5s1.5-.673 1.5-1.5-.673-1.5-1.5-1.5-1.5.673-1.5 1.5zM7.5 3C9.433 3 11 4.57 11 6.5S9.433 10 7.5 10 4 8.43 4 6.5 5.567 3 7.5 3zm0 2C6.673 5 6 5.673 6 6.5S6.673 8 7.5 8 9 7.327 9 6.5 8.327 5 7.5 5z";
+    if (!settings.hideCommunities) return;
+    const targetCommunitiesPathD = 'M7.501 19.917L7.471 21H.472l.029-1.027c.184-6.618 3.736-8.977 7-8.977.963 0 1.95.212 2.87.672-.444.478-.851 1.03-1.212 1.656-.507-.204-1.054-.329-1.658-.329-2.767 0-4.57 2.223-4.938 6.004H7.56c-.023.302-.05.599-.059.917zm15.998.056L23.528 21H9.472l.029-1.027c.184-6.618 3.736-8.977 7-8.977s6.816 2.358 7 8.977zM21.437 19c-.367-3.781-2.17-6.004-4.938-6.004s-4.57 2.223-4.938 6.004h9.875zm-4.938-9c-.799 0-1.527-.279-2.116-.73-.836-.64-1.384-1.638-1.384-2.77 0-1.93 1.567-3.5 3.5-3.5s3.5 1.57 3.5 3.5c0 1.132-.548 2.13-1.384 2.77-.589.451-1.317.73-2.116.73zm-1.5-3.5c0 .827.673 1.5 1.5 1.5s1.5-.673 1.5-1.5-.673-1.5-1.5-1.5-1.5.673-1.5 1.5zM7.5 3C9.433 3 11 4.57 11 6.5S9.433 10 7.5 10 4 8.43 4 6.5 5.567 3 7.5 3zm0 2C6.673 5 6 5.673 6 6.5S6.673 8 7.5 8 9 7.327 9 6.5 8.327 5 7.5 5z';
     const observer = new MutationObserver(() => {
       const svgs = document.querySelectorAll('svg[aria-hidden="true"].r-4qtqp9');
       svgs.forEach(svg => {
@@ -190,18 +189,33 @@
     observer.observe(document.body, { childList: true, subtree: true });
   }
 
+  function initHideMutedNotices() {
+    if (!settings.hideMutedNotices) return;
+    const hideMutedPostNotices = () => {
+      const replyCells = document.querySelectorAll('[data-testid="cellInnerDiv"]');
+      replyCells.forEach(cell => {
+        const mutedNotices = cell.querySelectorAll('.css-175oi2r.r-1awozwy.r-g6ijar.r-cliqr8.r-1867qdf.r-1phboty.r-rs99b7.r-18u37iz.r-1wtj0ep.r-1mmae3n.r-n7gxbd');
+        mutedNotices.forEach(notice => {
+          const parentCell = notice.closest('[data-testid="cellInnerDiv"]');
+          if (parentCell) parentCell.remove();
+        });
+      });
+    };
+    const observer = new MutationObserver(hideMutedPostNotices);
+    observer.observe(document.body, { childList: true, subtree: true });
+    hideMutedPostNotices();
+  }
+
   function applyCSSFromSettings() {
-    // Only apply on Twitter/X domains
-    if (!checkTwitterDomain()) return;
-    
     let css = '';
+
     if (settings.hidePremiumSignUp) css += 'a[href="/i/premium_sign_up"]{display:none!important}';
     if (settings.hideVerifiedOrgs) css += 'a[href="/i/verified-orgs-signup"]{display:none!important}';
     if (settings.hideother) {
       css += 'a[href="/jobs"]{display:none!important}';
-	  css += 'a[href="/i/premium-business"] { display: none !important; }';
-	  css += 'a[href="https://ads.twitter.com/?ref=gl-tw-tw-twitter-ads-rweb"] { display: none !important; }';
-	  css += 'a[href="https://ads.x.com/?ref=gl-tw-tw-twitter-ads-rweb"] { display: none !important; }';
+      css += 'a[href="/i/premium-business"]{display:none!important}';
+      css += 'a[href="https://ads.twitter.com/?ref=gl-tw-tw-twitter-ads-rweb"]{display:none!important}';
+      css += 'a[href="https://ads.x.com/?ref=gl-tw-tw-twitter-ads-rweb"]{display:none!important}';
       css += '.css-175oi2r.r-l00any.r-109y4c4.r-kuekak{display:none!important}';
       css += 'a.css-175oi2r.r-5oul0u.r-knv0ih.r-faml9v.r-2dysd3.r-13qz1uu.r-o7ynqc.r-6416eg.r-1ny4l3l.r-1loqt21{display:none!important}';
       css += 'a.css-175oi2r.r-5oul0u.r-1wzrnnt.r-1c4vpko.r-1c7gwzm.r-13qz1uu.r-o7ynqc.r-6416eg.r-1ny4l3l.r-1loqt21{display:none!important}';
@@ -209,11 +223,17 @@
     if (settings.hideExplore) css += 'a[href="/explore"]{display:none!important}';
     if (settings.hideNotifications) css += 'a[href="/notifications"]{display:none!important}';
     if (settings.hideBookmarks) css += 'a[href="/i/bookmarks"]{display:none!important}';
-    if (settings.hideMessages) css += 'a[href="/messages"]{display:none!important}';
+    if (settings.hideMessages) css += 'a[href="/i/chat"]{display:none!important}';
     if (settings.hideRightColumn) {
       css += '.css-175oi2r.r-yfoy6g.r-18bvks7.r-1867qdf.r-1phboty.r-rs99b7.r-1ifxtd0.r-1udh08x{display:none!important}';
       css += '.css-175oi2r.r-18bvks7.r-1867qdf.r-1phboty.r-1ifxtd0.r-1udh08x.r-1niwhzg.r-1yadl64{display:none!important}';
+      css += '.css-175oi2r.r-aqfbo4.r-10f7w94.r-1hycxz{display:none!important}';
     }
+    if (settings.hideChatButton) {
+      css += '.css-175oi2r.r-105ug2t.r-1867qdf.r-xnswec.r-u8s1d{display:none!important}';
+      css += '.css-175oi2r.r-105ug2t.r-1867qdf.r-qo02w8.r-u8s1d{display:none!important}';
+    }
+    if (settings.hideCreatorsStudio) css += 'a[href="/i/jf/creators/studio"]{display:none!important}';
     if (settings.useLargerCSS) {
       css += 'div[data-testid="sidebarColumn"]{padding-left:20px}';
       css += `.r-1ye8kvj{max-width:${settings.cssWidth}px!important}`;
@@ -222,42 +242,20 @@
     if (settings.useCustomPadding) {
       css += `div[data-testid="sidebarColumn"]{padding-left:${settings.paddingWidth}px!important}`;
     }
-    if (settings.hideMutedNotices) {
-      const hide = () => {
-        const replyCells = document.querySelectorAll('[data-testid="cellInnerDiv"]');
-        replyCells.forEach(cell => {
-          cell.querySelectorAll('.css-175oi2r.r-1awozwy.r-g6ijar.r-cliqr8.r-1867qdf.r-1phboty.r-rs99b7.r-18u37iz.r-1wtj0ep.r-1mmae3n.r-n7gxbd')
-            .forEach(notice => {
-              const parentCell = notice.closest('[data-testid="cellInnerDiv"]');
-              if (parentCell) parentCell.remove();
-            });
-        });
-      };
-      const observer = new MutationObserver(hide);
-      observer.observe(document.body, { childList: true, subtree: true });
-      hide();
-    }
+
     if (css) addGlobalStyle(css);
   }
 
   function init() {
-    // Only initialize on Twitter/X domains
-    if (!checkTwitterDomain()) {
-      console.log('X Clean: Not on Twitter/X domain, skipping initialization');
-      return;
-    }
-    
-    console.log('X Clean: Initializing on Twitter/X domain');
     loadSettings().then(() => {
       handleCopyFix();
       initHideSelectors();
       initHideGrok();
       initHideCommunities();
+      initHideMutedNotices();
       applyCSSFromSettings();
     });
   }
-
-  // Domain already checked at the top, proceed with initialization
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);

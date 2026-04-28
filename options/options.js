@@ -12,6 +12,8 @@ const DEFAULTS = {
   hideCommunities: false,
   hideMutedNotices: false,
   hideRightColumn: false,
+  hideChatButton: false,
+  hideCreatorsStudio: false,
   useLargerCSS: false,
   cssWidth: 680,
   useCustomPadding: false,
@@ -43,7 +45,7 @@ function render(items){
     },
     {
       title: chrome.i18n.getMessage('hideMutedNotices') || 'Hide Notices',
-      keys: ['hideMutedNotices', 'hideRightColumn']
+      keys: ['hideMutedNotices', 'hideRightColumn', 'hideChatButton', 'hideCreatorsStudio']
     },
     {
       title: chrome.i18n.getMessage('useLargerCSS') || 'Layout Settings',
@@ -140,6 +142,10 @@ function render(items){
 }
 
 document.addEventListener('DOMContentLoaded', ()=>{
+  const manifest = chrome.runtime.getManifest();
+  const versionTag = document.getElementById('versionTag');
+  if (versionTag) versionTag.textContent = `v${manifest.version}`;
+
   // simple i18n apply for static header
   document.querySelectorAll('[data-i18n]').forEach(el=>{
     const key = el.getAttribute('data-i18n');

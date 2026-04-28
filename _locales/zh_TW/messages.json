@@ -16,6 +16,8 @@
   "hideother": {"message": "隱藏 其他"},
   "hideMutedNotices": {"message": "隱藏 靜音帳戶通知"},
   "hideRightColumn": {"message": "隱藏 右側邊欄"},
+  "hideChatButton": {"message": "隱藏懸浮聊天"},
+  "hideCreatorsStudio": {"message": "隱藏 創作者工作室"},
   "useLargerCSS": {"message": "更大貼文區域"},
   "cssWidth": {"message": "自訂寬度"},
   "useCustomPadding": {"message": "右側邊欄間距"},
